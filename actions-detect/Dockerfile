@@ -11,10 +11,10 @@ LABEL "com.github.actions.color"="purple"
 
 # COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
-ADD "entrypoint.sh" "/entrypoint.sh"
+COPY entrypoint.sh /entrypoint.sh
 
-# RUN apt-get update && \
-#	    apt-get install curl -y && \
-#	    apt-get clean -y
+RUN apt-get update && \
+    apt-get install curl -y && \
+    apt-get clean -y
 
 ENTRYPOINT ["/entrypoint.sh"]
