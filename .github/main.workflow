@@ -5,7 +5,7 @@ workflow "Build and Detect" {
 
 action "Build" {
   uses = "actions/docker/cli@master"
-  args = ["build", "-t", "synopsys-actions", "."]
+  args = ["build", "-t", "ducky-crm", "."]
 }
 
 action "Deploy branch filter" {
