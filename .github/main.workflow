@@ -1,6 +1,6 @@
 workflow "Build and Detect" {
   on = "push"
-  resolves = "Docker Detect"
+  resolves = "Deploy branch filter"
 }
 
 action "Build" {
@@ -13,4 +13,3 @@ action "Deploy branch filter" {
   uses = "actions/bin/filter@master"
   args = "branch master"
 }
-
