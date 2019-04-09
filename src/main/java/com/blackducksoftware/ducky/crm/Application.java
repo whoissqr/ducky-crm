@@ -1,4 +1,4 @@
-package main.java.com.blackducksoftware.ducky.crm;
+package com.blackducksoftware.ducky.crm;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
