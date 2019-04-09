@@ -9,7 +9,7 @@ LABEL "com.github.actions.description"="Runs signature detect"
 LABEL "com.github.actions.icon"="upload-cloud"
 LABEL "com.github.actions.color"="purple"
 
-COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
+# COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
 COPY entrypoint.sh /entrypoint.sh
 
