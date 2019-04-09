@@ -15,7 +15,7 @@ action "Synopsys detect" {
 }
 
 action "Deploy branch filter" {
-  needs = ["Synopsys detect""]
+  needs = ["Synopsys detect"]
   uses = "actions/bin/filter@master"
   args = "branch master"
 }
