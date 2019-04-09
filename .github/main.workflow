@@ -10,8 +10,7 @@ action "Build" {
 
 action "Synopsys detect" {
   needs = ["Build"]
-  uses = "actions/bin/curl@master"
-  args = ["-s https://detect.synopsys.com/detect.sh --blackduck.url=https://bizdevhub.blackducksoftware.com --detect.project.name=ducky-crm --detect.project.version.name=1.0.2-gautam-actions --blackduck.api.token=MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ=="]
+  uses = "./actions-detect"
 }
 
 action "Deploy branch filter" {
