@@ -7,3 +7,4 @@ bash <(curl -s https://detect.synopsys.com/detect.sh) \
 --detect.policy.check.fail.on.severities=ALL \
 --detect.risk.report.pdf=true \
 --blackduck.trust.cert=true \
+--detect.api.timeout=9000000
