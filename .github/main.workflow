@@ -11,6 +11,7 @@ action "Build" {
 action "Synopsys detect" {
   needs = ["Build"]
   uses = "./actions-detect"
+  secrets = ["BLACKDUCK_API_TOKEN"]
   env = {
      BLACKDUCK_URL="https://bizdevhub.blackducksoftware.com"
   }
