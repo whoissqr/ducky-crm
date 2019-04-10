@@ -6,4 +6,5 @@ bash <(curl -s https://detect.synopsys.com/detect.sh) \
 --detect.project.version.name="1.0.2-gautam-actions" \
 --detect.risk.report.pdf=true \
 --blackduck.trust.cert=true \
---detect.api.timeout=9000000
+--detect.report.timeout=900 \
+--detect.tools="SIGNATURE_SCAN"
