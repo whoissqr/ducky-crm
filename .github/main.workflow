@@ -11,6 +11,10 @@ action "Build" {
 action "Synopsys detect" {
   needs = ["Build"]
   uses = "./actions-detect"
+  env = {
+     BLACKDUCK_URL="https://bizdevhub.blackducksoftware.com"
+  }
+  args = "$BLACKDUCK_URL"
 }
 
 action "Deploy branch filter" {
