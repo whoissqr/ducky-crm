@@ -1,7 +1,10 @@
 #!/bin/bash
-pwd
 
+cd target
 for filename in *; do echo "${filename}"; done
+cd ..
+
+pwd
 
 bash <(curl -s https://detect.synopsys.com/detect.sh) \
 --blackduck.url="$BLACKDUCK_URL" \
