@@ -1,3 +1,3 @@
 #!/bin/bash
-#cp "${GITHUB_WORKSPACE}/target/ducky.war" "${HOME}/ducky-crm.war"
+cp " /github/home/ducky.war" "${HOME}/${GITHUB_ACTION}.war"
 find ${HOME}
