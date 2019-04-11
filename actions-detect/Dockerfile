@@ -17,4 +17,6 @@ RUN apt-get update && \
     apt-get install curl -y && \
     apt-get clean -y
 
+RUN find ${GITHUB_WORKSPACE}/BUILD_OUTPUT/target/.
+
 ENTRYPOINT ["/entrypoint.sh"]
