@@ -6,8 +6,9 @@ RUN mkdir $CATALINA_HOME/src
 ADD src $CATALINA_HOME/src
 COPY pom.xml $CATALINA_HOME
 
-RUN mvn -f $CATALINA_HOME/pom.xml clean package && mkdir ${HOME}/BUILD_OUTPUT && cp -r $CATALINA_HOME/target ${HOME}/BUILD_OUTPUT
+# RUN mvn -f $CATALINA_HOME/pom.xml clean package && mkdir ${HOME}/BUILD_OUTPUT && cp -r $CATALINA_HOME/target ${HOME}/BUILD_OUTPUT
 
-RUN find ${HOME}/BUILD_OUTPUT/target/.
+COPY target/ducky-crm-0.2.0.war ${HOME}
+RUN find ${HOME}.
 
-#RUN cd $CATALINA_HOME/target && for filename in *; do echo "${filename}"; done && cd ..
+# RUN cd $CATALINA_HOME/target && for filename in *; do echo "${filename}"; done && cd ..

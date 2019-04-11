@@ -17,6 +17,6 @@ RUN apt-get update && \
     apt-get install curl -y && \
     apt-get clean -y
 
-RUN find ${HOME}/BUILD_OUTPUT/target/.
+RUN find ${HOME}/.
 
 ENTRYPOINT ["/entrypoint.sh"]
