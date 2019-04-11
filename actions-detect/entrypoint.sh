@@ -1,7 +1,6 @@
 #!/bin/bash
 
-find ${GITHUB_WORKSPACE}/.
-
+ls
 pwd
 
 # bash <(curl -s https://detect.synopsys.com/detect.sh) \
