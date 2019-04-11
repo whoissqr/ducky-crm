@@ -1,5 +1,4 @@
 #!/bin/bash
-
 find ${HOME}
 
 # bash <(curl -s https://detect.synopsys.com/detect.sh) \

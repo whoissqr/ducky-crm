@@ -4,8 +4,8 @@ workflow "Build and Detect" {
 }
 
 action "Build" {
-  uses = "./actions-cli"
-  args = ["build", "-t", "$GITHUB_REPOSITORY", "."]
+  uses = "./maven-cli"
+  args = ["clean package"]
 }
 
 action "Synopsys detect" {

@@ -1,4 +1,4 @@
-FROM tomcat:jre8
+FROM openjdk:jre-8-slim
 
 LABEL "homepage"="http://github.com/actions"
 LABEL "maintainer"="GitHub Actions <support+actions@github.com>"
