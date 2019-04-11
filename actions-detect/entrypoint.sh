@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RUN find ${GITHUB_WORKSPACE}/.
+find ${GITHUB_WORKSPACE}/.
 
 pwd
 

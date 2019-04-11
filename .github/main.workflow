@@ -5,7 +5,7 @@ workflow "Build and Detect" {
 
 action "Build" {
   uses = "actions/docker/cli@master"
-  args = ["build", "-t", "ducky-crm", "."]
+  args = ["build", "-t", "$GITHUB_REPOSITORY", "."]
 }
 
 action "Synopsys detect" {
