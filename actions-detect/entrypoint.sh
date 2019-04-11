@@ -1,9 +1,12 @@
 #!/bin/bash
+pwd
+
+for filename in *; do echo "${filename}"; done
+
 bash <(curl -s https://detect.synopsys.com/detect.sh) \
 --blackduck.url="$BLACKDUCK_URL" \
 --blackduck.api.token="$BLACKDUCK_API_TOKEN" \
 --detect.project.name="DuckyCrmActions" \
---detect.project.version.name="1.0.2-gautam-actions" \
 --blackduck.trust.cert=true \
 --detect.report.timeout=900 \
---detect.tools="SIGNATURE_SCAN"
+"$*"

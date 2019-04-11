@@ -15,7 +15,7 @@ action "Synopsys detect" {
   env = {
      BLACKDUCK_URL="https://bizdevhub.blackducksoftware.com"
   }
-  args = "$BLACKDUCK_URL"
+  args = "--detect.project.version.name=1.0.2-gautam-actions --detect.tools=SIGNATURE_SCAN"
 }
 
 action "Deploy branch filter" {
