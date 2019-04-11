@@ -8,7 +8,8 @@ LABEL "com.github.actions.name"="GitHub Action for Docker"
 LABEL "com.github.actions.description"="Wraps the Docker CLI to enable Docker commands."
 LABEL "com.github.actions.icon"="package"
 LABEL "com.github.actions.color"="blue"
-COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
+
+# COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
 COPY entrypoint.sh /entrypoint.sh
 
