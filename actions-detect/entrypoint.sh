@@ -1,5 +1,6 @@
 #!/bin/bash
 find ${HOME}
+find ${GITHUB_WORKSPACE}
 
 # bash <(curl -s https://detect.synopsys.com/detect.sh) \
 # --blackduck.url="$BLACKDUCK_URL" \
