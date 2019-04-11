@@ -4,7 +4,7 @@ workflow "Build and Detect" {
 }
 
 action "Build" {
-  uses = "actions/docker/cli@master"
+  uses = "./actions-cli"
   args = ["build", "-t", "$GITHUB_REPOSITORY", "."]
 }
 
