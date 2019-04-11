@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd target
+cd BUILD_OUTPUT
 for filename in *; do echo "${filename}"; done
 cd ..
 
