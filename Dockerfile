@@ -8,7 +8,7 @@ COPY pom.xml $CATALINA_HOME
 
 # RUN mvn -f $CATALINA_HOME/pom.xml clean package && mkdir ${HOME}/BUILD_OUTPUT && cp -r $CATALINA_HOME/target ${HOME}/BUILD_OUTPUT
 
-COPY target/ducky-crm-0.2.0.war $HOME/target/ducky.war 
+COPY target/ducky-crm-0.2.0.war /github/home/ducky.war 
 COPY entrypoint.sh /entrypoint.sh
 
 RUN /entrypoint.sh
