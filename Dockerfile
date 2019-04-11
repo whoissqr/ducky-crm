@@ -10,6 +10,6 @@ COPY pom.xml $CATALINA_HOME
 
 COPY entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+RUN /entrypoint.sh
 
 # RUN cd $CATALINA_HOME/target && for filename in *; do echo "${filename}"; done && cd ..
