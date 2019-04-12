@@ -5,7 +5,7 @@ LABEL repository="http://github.com/bas/mvn"
 LABEL homepage="http://github.com/bas/mvn"
 LABEL maintainer="Bas Peters <bpeters.mob@gmail.com>"
 
-LABEL com.github.actions.name="GitHub Action for Apache Mmaven"
+LABEL com.github.actions.name="GitHub Action for Apache Maven"
 LABEL com.github.actions.description="Wraps the maven client to enable common mvn commands."
 LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="red"

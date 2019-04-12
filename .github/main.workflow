@@ -12,10 +12,13 @@ action "Synopsys detect" {
   needs = ["Build"]
   uses = "./actions-detect"
   secrets = ["BLACKDUCK_API_TOKEN"]
-  env = {
-     BLACKDUCK_URL="https://bizdevhub.blackducksoftware.com"
-  }
-  args = "--detect.project.version.name=1.0.2-gautam-actions-fixed --detect.tools=SIGNATURE_SCAN"
+  args = " \
+  --blackduck.url="https://bizdevhub.blackducksoftware.com" \
+  --detect.project.version.name=1.0.2-gautam-actions-fixed \
+  --detect.tools=SIGNATURE_SCAN \
+  --detect.project.name="DuckyCrmActions-Fixed" \
+  --blackduck.trust.cert=true \
+  --detect.report.timeout=900 \"
 }
 
 action "Deploy branch filter" {
