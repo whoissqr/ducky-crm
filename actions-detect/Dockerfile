@@ -12,6 +12,9 @@ LABEL "com.github.actions.color"="purple"
 # COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
 RUN apk --no-cache add curl
+RUN apk update
+RUN apk upgrade
+RUN apk add bash
 
 COPY entrypoint.sh /entrypoint.sh
 
