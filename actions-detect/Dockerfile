@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jre
 
 LABEL "homepage"="http://github.com/actions"
 LABEL "maintainer"="GitHub Actions <support+actions@github.com>"
@@ -10,11 +10,15 @@ LABEL "com.github.actions.icon"="upload-cloud"
 LABEL "com.github.actions.color"="purple"
 
 # COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
+# For ALPINE
+# RUN apk update
+# RUN apk upgrade
+# RUN apk add bash
+# RUN apk --no-cache add curl
 
-RUN apk --no-cache add curl
-RUN apk update
-RUN apk upgrade
-RUN apk add bash
+RUN apt-get update && \
+    apt-get install curl -y && \
+    apt-get clean -y
 
 COPY entrypoint.sh /entrypoint.sh
 
