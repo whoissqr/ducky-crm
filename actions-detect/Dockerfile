@@ -11,10 +11,7 @@ LABEL "com.github.actions.color"="purple"
 
 # COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
-
-RUN apt-get update && \
-    apt-get install curl -y && \
-    apt-get clean -y
+RUN apk --no-cache add curl
 
 COPY entrypoint.sh /entrypoint.sh
 
