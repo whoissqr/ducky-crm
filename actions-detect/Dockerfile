@@ -10,11 +10,6 @@ LABEL "com.github.actions.icon"="upload-cloud"
 LABEL "com.github.actions.color"="purple"
 
 # COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
-# For ALPINE
-# RUN apk update
-# RUN apk upgrade
-# RUN apk add bash
-# RUN apk --no-cache add curl
 
 RUN apt-get update && \
     apt-get install curl -y && \

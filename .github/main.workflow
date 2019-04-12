@@ -12,7 +12,7 @@ action "Synopsys detect" {
   needs = ["Build"]
   uses = "./actions-detect"
   secrets = ["BLACKDUCK_API_TOKEN", "BLACKDUCK_URL"]
-  args = "--detect.tools=SIGNATURE_SCAN"
+  args = "--detect.tools=SIGNATURE_SCAN --detect.project.name=$GITHUB_REPOSITORY"
 }
 
 action "Deploy branch filter" {
