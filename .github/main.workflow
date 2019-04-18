@@ -10,8 +10,10 @@ action "Build" {
 
 action "Synopsys detect" {
   uses = "gautambaghel/synopsys-detect@master"
-  secrets = ["BLACKDUCK_API_TOKEN", "BLACKDUCK_URL"]
-  args = "--detect.tools=SIGNATURE_SCAN,POLARIS --detect.project.name=$GITHUB_REPOSITORY --polaris.url=https://sipse.polaris.synopsys.com --polaris.access.token=nresfs58d55nb3d7c8s52luj2a2iciiiicnielsdae3uesi95850"
+  secrets = ["SWIP_ACCESS_TOKEN", "SWIP_SERVER_URL"]
+  env = {
+      BASE_IMG="node:10.15.1"
+  }
 }
 
 action "Deploy branch filter" {
