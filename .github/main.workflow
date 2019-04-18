@@ -9,5 +9,4 @@ action "Polaris" {
   env = {
       BASE_IMG="node:10.15.1"
   }
-  args = "$BASE_IMG"
 }
