@@ -1,10 +1,10 @@
 version: "1"
 project:
-  name: ducky-actions
+  name: ducky-crm-actions
   branch: master
   revision:
-    name: asd
-    date: asd
+    name: ducky-polaris
+    date: 2019-04-20T13:25:30Z
     modified: "false"
 capture:
   build:
