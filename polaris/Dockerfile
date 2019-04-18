@@ -1,8 +1,7 @@
 #Change this image to the base image from your build tool
-FROM maven:3.6.0-jdk-8-alpine
+FROM maven:3.6.1-jdk-8
 ENV SWIP_ACCESS_TOKEN=$SWIP_ACCESS_TOKEN
 ENV SWIP_SERVER_URL=$SWIP_SERVER_URL
-
 
 #Don't edit below this line
 ENV SWIP_HOME /.swip
