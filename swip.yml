@@ -1,10 +1,10 @@
 version: "1"
 project:
-  name: ${scm.git.repo}
-  branch: ${scm.git.branch}
+  name: ducky-actions
+  branch: master
   revision:
-    name: ${scm.git.commit}
-    date: ${scm.git.commit.date}
+    name: asd
+    date: asd
     modified: "false"
 capture:
   build:
