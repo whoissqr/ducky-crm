@@ -1,7 +1,7 @@
 #Change this image to the base image from your build tool
-FROM ${BASE_IMG}
-ENV SWIP_ACCESS_TOKEN=${SWIP_ACCESS_TOKEN}
-ENV SWIP_SERVER_URL=${SWIP_SERVER_URL}
+FROM $BASE_IMG
+ENV SWIP_ACCESS_TOKEN=$SWIP_ACCESS_TOKEN
+ENV SWIP_SERVER_URL=$SWIP_SERVER_URL
 
 #Don't edit below this line
 ENV SWIP_HOME /.swip
