@@ -1,23 +1,12 @@
-workflow "Build and Detect" {
+workflow "Build and Polaris" {
   on = "push"
-  resolves = "Deploy branch filter"
+  resolves = "Polaris"
 }
 
-action "Build" {
-  uses = "./maven-cli"
-  args = ["clean package"]
-}
-
-action "Synopsys detect" {
-  uses = "gautambaghel/synopsys-detect@master"
+action "Polaris" {
+  uses = "./polaris"
   secrets = ["SWIP_ACCESS_TOKEN", "SWIP_SERVER_URL"]
   env = {
       BASE_IMG="node:10.15.1"
   }
-}
-
-action "Deploy branch filter" {
-  needs = ["Synopsys detect", "Build"]
-  uses = "actions/bin/filter@master"
-  args = "branch master"
 }
