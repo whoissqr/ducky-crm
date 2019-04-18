@@ -3,6 +3,7 @@ FROM maven:3.6.0-jdk-8-alpine
 ENV SWIP_ACCESS_TOKEN=$SWIP_ACCESS_TOKEN
 ENV SWIP_SERVER_URL=$SWIP_SERVER_URL
 
+
 #Don't edit below this line
 ENV SWIP_HOME /.swip
 RUN mkdir /.swip && wget https://polaris.synopsys.com/api/tools/swip_cli-linux64.zip -O /tmp/swip_cli-linux64.zip \
