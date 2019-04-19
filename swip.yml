@@ -1,0 +1,44 @@
+version: "1"
+project:
+  name: ducky-actions
+  branch: master
+  revision:
+    name: ducky-polaris
+    date: 2019-04-20T13:25:30Z
+    modified: "false"
+capture:
+  build:
+    cleanCommands:
+    - shell: [mvn, -f, pom.xml, clean]
+    buildCommands:
+    - shell: [mvn, -f, pom.xml, package]
+  fileSystem:
+    ears:
+      extensions: [ear]
+      files:
+      - directory: ${project.projectDir}
+    javascript:
+      extensions: [js]
+      files:
+      - directory: ${project.projectDir}
+      - excludeRegex: node_modules|bower_components|vendor
+    php:
+      extensions: [php]
+      files:
+      - directory: ${project.projectDir}
+    python:
+      extensions: [py]
+      files:
+      - directory: ${project.projectDir}
+    ruby:
+      extensions: [rb]
+      files:
+      - directory: ${project.projectDir}
+    wars:
+      extensions: [war]
+      files:
+      - directory: ${project.projectDir}/target
+install:
+  coverity:
+    version: latest
+serverUrl: https://sipse.polaris.synopsys.com
