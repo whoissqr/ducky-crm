@@ -41,4 +41,4 @@ capture:
 install:
   coverity:
     version: latest
-serverUrl: https://sipse.polaris.synopsys.com
+serverUrl: https://polaris.synopsys.com
