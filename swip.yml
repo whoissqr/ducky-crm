@@ -14,9 +14,6 @@ capture:
       project:
        languages:
          - "java"
-         - "javascript"
-        excludes:
-         - ignorefile.txt
 install:
   coverity:
     version: latest
