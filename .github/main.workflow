@@ -4,9 +4,7 @@ workflow "Build and Polaris" {
 }
 
 action "Polaris" {
-  uses = "./polaris"
+  uses = "gautambaghel/synopsys-detect@master"
   secrets = ["SWIP_ACCESS_TOKEN", "SWIP_SERVER_URL"]
-  env = {
-      BASE_IMG="node:10.15.1"
-  }
+  args = "--detect.tools=POLARIS --detect.project.name=$GITHUB_REPOSITORY --polaris.url=$SWIP_SERVER_URL --polaris.access.token=SWIP_ACCESS_TOKEN"
 }
