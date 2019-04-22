@@ -1,6 +1,6 @@
 #Change this image to the base image from your build tool
 FROM debian:latest
-FROM $BASE_IMG
+FROM ${BASE_IMG}
 ENV SWIP_ACCESS_TOKEN=$SWIP_ACCESS_TOKEN
 ENV SWIP_SERVER_URL=$SWIP_SERVER_URL
 
