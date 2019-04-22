@@ -7,37 +7,16 @@ project:
     date: ${scm.git.commit.date}
     modified: "false"
 capture:
-  build:
-    cleanCommands:
-    - shell: [mvn, -f, pom.xml, -DskipTests ,clean]
-    buildCommands:
-    - shell: [mvn, -f, pom.xml, -DskipTests, package]
-  fileSystem:
-    ears:
-      extensions: [ear]
-      files:
-      - directory: ${project.projectDir}
-    javascript:
-      extensions: [js]
-      files:
-      - directory: ${project.projectDir}
-      - excludeRegex: node_modules|bower_components|vendor
-    php:
-      extensions: [php]
-      files:
-      - directory: ${project.projectDir}
-    python:
-      extensions: [py]
-      files:
-      - directory: ${project.projectDir}
-    ruby:
-      extensions: [rb]
-      files:
-      - directory: ${project.projectDir}
-    wars:
-      extensions: [war]
-      files:
-      - directory: ${project.projectDir}/target
+  tools:
+   coverity:
+    2018.12:
+     buildless:
+      project:
+       languages:
+         - "java"
+         - "javascript"
+        excludes:
+         - ignorefile.txt
 install:
   coverity:
     version: latest
