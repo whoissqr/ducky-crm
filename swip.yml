@@ -1,10 +1,10 @@
 version: "1"
 project:
-  name: ${scm.git.repo}
-  branch: ${scm.git.branch}
+  name: ducky-crm-buildless
+  branch: master
   revision:
-    name: ${scm.git.commit}
-    date: ${scm.git.commit.date}
+    name: ducky-pol-buildless
+    date: 2019-04-20T13:25:30Z
     modified: "false"
 capture:
   tools:
