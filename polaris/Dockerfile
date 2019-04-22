@@ -1,8 +1,13 @@
 # CHANGE THIS IMAGE TO THE BASE IMAGE FROM YOUR BUILD TOOL
 
-FROM maven:3.6.1-jdk-8
+FROM debian:latest
 
 # DO NOT EDIT BELOW THIS LINE
+
+RUN  apt-get update \
+  && apt-get install -y wget \
+  && apt-get install -y unzip \
+  && rm -rf /var/lib/apt/lists/*
 
 ENV SWIP_ACCESS_TOKEN=$SWIP_ACCESS_TOKEN
 ENV SWIP_SERVER_URL=$SWIP_SERVER_URL
