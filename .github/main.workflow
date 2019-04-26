@@ -3,14 +3,13 @@ workflow "Build and Container Scan" {
   resolves = "Container Detect"
 }
 
-action "Docker Convert" {
-  needs = ["Docker Build"]
+action "Docker Build" {
   uses = "actions/action-builder/docker@master"
   runs = "make"
   args = "build"
 }
 
-action "Container Detect" {
+action "Container Build" {
   needs = ["Docker Convert"]
   uses = "actions/bin/sh@master"
   args = "ls -ltr"
