@@ -9,6 +9,7 @@ action "Build" {
 }
 
 action "Synopsys detect" {
+  needs = ["Build"]
   uses = "gautambaghel/synopsys-detect@master"
   secrets = ["SWIP_ACCESS_TOKEN", "SWIP_SERVER_URL"]
   env = {
@@ -17,7 +18,7 @@ action "Synopsys detect" {
 }
 
 action "Deploy branch filter" {
-  needs = ["Synopsys detect", "Build"]
+  needs = ["Synopsys detect"]
   uses = "actions/bin/filter@master"
   args = "branch master"
 }
