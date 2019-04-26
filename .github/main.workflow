@@ -9,8 +9,8 @@ action "Docker Build" {
   args = "build"
 }
 
-action "Container Build" {
-  needs = ["Docker Convert"]
+action "Container Detect" {
+  needs = ["Docker Build"]
   uses = "actions/bin/sh@master"
   args = "ls -ltr"
 }
