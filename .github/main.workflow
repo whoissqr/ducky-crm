@@ -1,10 +1,17 @@
-workflow "Build and Polaris" {
+workflow "Build and Container Scan" {
   on = "push"
-  resolves = "Polaris"
+  resolves = "Container Detect"
 }
 
-action "Polaris" {
-  uses = "gautambaghel/synopsys-detect@master"
-  secrets = ["BLACKDUCK_URL","BLACKDUCK_API_TOKEN","SWIP_ACCESS_TOKEN", "SWIP_SERVER_URL"]
-  args = "--detect.tools=POLARIS --detect.project.name=$GITHUB_REPOSITORY --polaris.url=$SWIP_SERVER_URL --polaris.access.token=SWIP_ACCESS_TOKEN"
+action "Docker Convert" {
+  needs = ["Docker Build"]
+  uses = "actions/action-builder/docker@master"
+  runs = "make"
+  args = "build"
+}
+
+action "Container Detect" {
+  needs = ["Docker Convert"]
+  uses = "actions/bin/sh@master"
+  args = "ls -ltr"
 }
