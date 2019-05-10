@@ -3,27 +3,13 @@ workflow "Build and Container Scan" {
   resolves = "Container Detect"
 }
 
-action "Lint" {
-  uses = "actions/action-builder/shell@master"
-  runs = "make"
-  args = "lint"
-}
-
-action "Test" {
-  uses = "actions/action-builder/shell@master"
-  runs = "make"
-  args = "test"
-}
-
 action "Build" {
-  needs = ["Lint", "Test"]
   uses = "actions/action-builder/docker@master"
-  runs = "make"
-  args = "build"
+  args = "build -t $GITHUB_REPOSITORY ."
 }
 
 action "Container Detect" {
-  needs = ["Build"]
-  uses = "actions/bin/sh@master"
-  args = "ls -ltr"
+  needs = ["Build", "Test"]
+  uses = "actions/action-builder/docker@master"
+  args = "save $GITHUB_REPOSITORY > $GITHUB_REPOSITORY.tar"
 }
