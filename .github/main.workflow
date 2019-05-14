@@ -3,13 +3,19 @@ workflow "Build and Container Scan" {
   resolves = "Synopsys Detect"
 }
 
-action "Build" {
+action "Build Maven" {
+  uses = "./maven-cli"
+  args = ["clean package"]
+}
+
+action "Build Container" {
+  needs = ["Build Maven"]
   uses = "actions/docker/cli@master"
   args = "build -t $GITHUB_REPOSITORY ."
 }
 
 action "Save to Tar" {
-  needs = ["Build"]
+  needs = ["Build Container"]
   uses = "actions/docker/cli@master"
   args = "save $GITHUB_REPOSITORY > $GITHUB_REPOSITORY.tar"
 }
