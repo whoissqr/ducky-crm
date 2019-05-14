@@ -1,6 +1,6 @@
 workflow "Build and Container Scan" {
   on = "push"
-  resolves = "Container Detect"
+  resolves = "Synopsys Detect"
 }
 
 action "Build" {
