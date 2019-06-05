@@ -7,12 +7,18 @@ FROM zenika/alpine-maven:3-jdk8
 RUN  apk update \
   && apk add wget \
   && apk add unzip \
+  && apk add bash \
+  && apk add dos2unix \
   && rm -rf /var/lib/apt/lists/*
+
 
 ENV SWIP_ACCESS_TOKEN=$SWIP_ACCESS_TOKEN
 ENV SWIP_SERVER_URL=$SWIP_SERVER_URL
 ENV SWIP_HOME /.swip
-RUN mkdir /.swip && wget https://polaris.synopsys.com/api/tools/swip_cli-linux64.zip -O /tmp/swip_cli-linux64.zip \
-&& unzip /tmp/swip_cli-linux64.zip -d /tmp/swip_cli-linux64 \
-&& rm /tmp/swip_cli-linux64.zip && cp /tmp/swip_cli-linux64/**/bin/* /usr/bin
-ENTRYPOINT [ "swip_cli", "analyze", "-w" ]
+
+
+COPY entrypoint.sh /
+
+RUN dos2unix /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
