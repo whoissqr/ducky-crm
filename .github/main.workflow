@@ -15,8 +15,8 @@ action "Build Container" {
 }
 
 action "Synopsys Detect" {
-  needs = ["Export to Tar"]
+  needs = ["Build Container"]
   uses = "gautambaghel/synopsys-detect@master"
   secrets = ["BLACKDUCK_URL","BLACKDUCK_API_TOKEN","SWIP_ACCESS_TOKEN", "SWIP_SERVER_URL"]
-  args = "--detect.tools=DOCKER --detect.project.name=$GITHUB_REPOSITORY"
+  args = "--detect.tools=DOCKER --detect.project.name=$GITHUB_REPOSITORY --detect.docker.image=$GITHUB_REPOSITORY"
 }
