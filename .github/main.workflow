@@ -11,12 +11,12 @@ action "Build Maven" {
 action "Build Container" {
   needs = ["Build Maven"]
   uses = "actions/docker/cli@master"
-  args = "build -t $GITHUB_REPOSITORY ."
+  args = "build -t CONTAINER_NAME ."
 }
 
 action "Synopsys Detect" {
   needs = ["Export to Tar"]
   uses = "gautambaghel/synopsys-detect@master"
   secrets = ["BLACKDUCK_URL","BLACKDUCK_API_TOKEN","SWIP_ACCESS_TOKEN", "SWIP_SERVER_URL"]
-  args = "--detect.tools=DOCKER --detect.project.name=\"$GITHUB_REPOSITORY\" --detect.docker.image=\"$GITHUB_REPOSITORY\""
+  args = "--detect.tools=POLARIS --detect.project.name=$GITHUB_REPOSITORY --detect.docker.image=CONTAINER_NAME"
 }
