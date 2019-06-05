@@ -4,9 +4,9 @@ FROM zenika/alpine-maven:3-jdk8
 
 # DO NOT EDIT BELOW THIS LINE
 
-RUN  apt-get update \
-  && apt-get install -y wget \
-  && apt-get install -y unzip \
+RUN  apk update \
+  && apk add wget \
+  && apk add unzip \
   && rm -rf /var/lib/apt/lists/*
 
 ENV SWIP_ACCESS_TOKEN=$SWIP_ACCESS_TOKEN
@@ -15,4 +15,4 @@ ENV SWIP_HOME /.swip
 RUN mkdir /.swip && wget https://polaris.synopsys.com/api/tools/swip_cli-linux64.zip -O /tmp/swip_cli-linux64.zip \
 && unzip /tmp/swip_cli-linux64.zip -d /tmp/swip_cli-linux64 \
 && rm /tmp/swip_cli-linux64.zip && cp /tmp/swip_cli-linux64/**/bin/* /usr/bin
-ENTRYPOINT [ "swip_cli analyze -w" ]
+ENTRYPOINT [ "swip_cli", "analyze", "-w" ]
