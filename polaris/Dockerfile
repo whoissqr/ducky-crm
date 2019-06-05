@@ -8,7 +8,7 @@ RUN  apk update \
   && apk add wget \
   && apk add unzip \
   && apk add bash \
-  && apk add dos2unix \
+  && apk add cherokee --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted\
   && rm -rf /var/lib/apt/lists/*
 
 
