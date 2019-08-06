@@ -1,11 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Build the Application') {
-      steps {
-        git(url: 'https://github.com/gautambaghel/ducky-crm.git', branch: 'master')
-      }
-    }
     stage('Test Docker') {
       agent {
         docker {
@@ -15,7 +10,10 @@ pipeline {
 
       }
       steps {
-        echo 'docker -v'
+        sh '''#!/bin/bash
+
+docker -v
+'''
       }
     }
   }
