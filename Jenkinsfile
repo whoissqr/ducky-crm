@@ -22,8 +22,9 @@ pipeline {
         }
         steps {
           container('detect') {
-            sh 'export PATH=/bin/bash:$PATH'
-            sh 'bash <(curl -s https://detect.synopsys.com/detect.sh) \
+            sh 'wget https://detect.synopsys.com/detect.sh'
+            sh 'chmod +x detect.sh'
+            sh './detect.sh \
                 --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                 --blackduck.api.token="NWU3NzM4MzQtMWU3Yi00MjVkLThkZTMtNTVlNzQyY2Q0ODFkOjdkOWM5NGJiLTRhZDUtNDk3Yy04NDdlLWMyNmFmMDBkYTg4ZA==" \
                 --detect.project.name="JenkinsDucky" \
