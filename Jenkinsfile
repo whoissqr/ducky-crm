@@ -15,9 +15,7 @@ pipeline {
       agent { label 'detect-app' }
       steps {
         container('detect') {
-          sh 'wget https://detect.synopsys.com/detect.sh'
-          sh 'chmod +x detect.sh'
-          sh './detect.sh \
+          sh '/entrypoint.sh \
               --blackduck.url="https://bizdevhub.blackducksoftware.com" \
               --blackduck.api.token="NWU3NzM4MzQtMWU3Yi00MjVkLThkZTMtNTVlNzQyY2Q0ODFkOjdkOWM5NGJiLTRhZDUtNDk3Yy04NDdlLWMyNmFmMDBkYTg4ZA==" \
               --detect.project.name="CloudBeesDucky" \
