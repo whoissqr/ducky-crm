@@ -15,9 +15,15 @@ pipeline {
     
     stage('Test') {
       agent { label 'detect-app' }
+      when {
+        expression {
+          currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+        }
+      }
       steps {
         container('detect') {
           sh 'ls'
+          sh 'java -version'
         }
       }
     }
