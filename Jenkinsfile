@@ -1,10 +1,13 @@
 pipeline {
-  agent any
+  agent none
   stages {
-    stage('Say Hello') {
+    stage('Test') {
+      agent { label 'maven-app' }
       steps {
-        echo 'Hello World!'   
-        sh 'java -version'
+        container('maven') {
+          echo 'Hello World!'   
+          sh 'java -version'
+        }
       }
     }
   }
