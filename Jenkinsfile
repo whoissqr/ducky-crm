@@ -8,6 +8,7 @@ pipeline {
         steps {
           container('maven') {
             sh 'mvn clean package'
+            sh 'ls'
             archiveArtifacts artifacts: '**/target/*.war', fingerprint: true, onlyIfSuccessful: true
           }
         }
@@ -22,7 +23,6 @@ pipeline {
         }
         steps {
           container('detect') {
-            sh 'cd ${JENKINS_HOME}'
             sh 'ls'
             sh 'wget https://detect.synopsys.com/detect.sh'
             sh 'chmod +x detect.sh'
