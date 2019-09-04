@@ -22,6 +22,7 @@ pipeline {
         }
         steps {
           container('detect') {
+            sh 'export PATH=/usr/bin/wget:$PATH'
             sh 'wget https://detect.synopsys.com/detect.sh'
             sh 'chmod +x detect.sh'
             sh './detect.sh \
