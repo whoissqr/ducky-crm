@@ -13,9 +13,11 @@ pipeline {
     
     stage('Test') {
       agent { label 'detect-app' }
-      container('detect') {
+      steps {
+        container('detect') {
           sh 'ls'
-       }
+        }
+      }
     }
     
   }
