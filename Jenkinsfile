@@ -5,8 +5,7 @@ pipeline {
       agent { label 'maven-app' }
       steps {
         container('maven') {
-          echo 'Hello World!'   
-          sh 'java -version'
+          sh 'mvn clean package'
         }
       }
     }
