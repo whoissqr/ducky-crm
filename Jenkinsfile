@@ -1,29 +1,26 @@
 
 pipeline {
-    agent any
-    tools {
-        maven 'Maven 3.3.9'
-        jdk 'jdk8'
-    }
-    stages {
-        stage ('Initialize') {
-            steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
-            }
+  agent none
+  stages {
+    
+    stage('Build') {
+      agent { label 'maven-app' }
+      steps {
+        container('maven') {
+          sh 'mvn clean package'
+          archiveArtifacts artifacts: '**/target/*.war', fingerprint: true 
         }
-
-        stage ('Build') {
-            steps {
-                sh 'mvn clean package' 
-            }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml' 
-                }
-            }
-        }
+      }
     }
+    
+    stage('Test') {
+      agent { label 'detect-app' }
+      steps {
+        container('detect') {
+          sh 'ls'
+        }
+      }
+    }
+    
+  }
 }
