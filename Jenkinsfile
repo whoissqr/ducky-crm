@@ -22,8 +22,7 @@ pipeline {
                 --detect.tools="DETECTOR" \
                 --detect.project.version.name="${BUILD_TAG}" \
                 --detect.risk.report.pdf=true \
-                --blackduck.trust.cert=true \
-                --detect.api.timeout=900000'
+                --blackduck.trust.cert=true
             
             sh './detect.sh \
                 --polaris.url="https://sipse.polaris.synopsys.com" \
@@ -31,8 +30,7 @@ pipeline {
                 --detect.project.name="CloudBeesDucky" \
                 --detect.tools="POLARIS" \
                 --detect.project.version.name="${BUILD_TAG}" \
-                --blackduck.trust.cert=true \
-                --detect.api.timeout=900000'
+                --blackduck.trust.cert=true 
           }
         }
       }
