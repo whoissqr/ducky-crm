@@ -34,6 +34,7 @@ pipeline {
                 --detect.risk.report.pdf=true \
                 --blackduck.trust.cert=true \
                 --detect.api.timeout=900000'
+            archiveArtifacts artifacts: '**/*.pdf', fingerprint: true, onlyIfSuccessful: true
           }
         }
       }
