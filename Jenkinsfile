@@ -32,8 +32,7 @@ pipeline {
                 --detect.tools="SIGNATURE_SCAN" \
                 --detect.project.version.name="${BUILD_TAG}" \
                 --detect.risk.report.pdf=true \
-                --blackduck.trust.cert=true \
-                --detect.api.timeout=9000000'
+                --blackduck.trust.cert=true 
             archiveArtifacts artifacts: '**/*.pdf', fingerprint: true, onlyIfSuccessful: true
           }
         }
