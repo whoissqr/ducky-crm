@@ -20,7 +20,7 @@ pipeline {
                 --blackduck.api.token="MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ==" \
                 --detect.project.name="CloudBeesDucky" \
                 --detect.tools="DETECTOR" \
-                --detect.project.version.name="${BUILD_TAG}" \
+                --detect.project.version.name="Detector_${BUILD_TAG}" \
                 --detect.risk.report.pdf=true \
                 --blackduck.trust.cert=true
             
