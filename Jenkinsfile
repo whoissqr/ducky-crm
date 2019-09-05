@@ -13,7 +13,7 @@ pipeline {
         }
       }
 
-      stage('Test') {
+      stage('Detect') {
         agent { label 'detect-app' }
         when {
           expression {
