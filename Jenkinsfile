@@ -19,9 +19,18 @@ pipeline {
                 --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                 --blackduck.api.token="MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ==" \
                 --detect.project.name="CloudBeesDucky" \
-                --detect.tools=DETECTOR \
+                --detect.tools="DETECTOR" \
                 --detect.project.version.name="${BUILD_TAG}" \
                 --detect.risk.report.pdf=true \
+                --blackduck.trust.cert=true \
+                --detect.api.timeout=900000'
+            
+            sh './detect.sh \
+                --polaris.url="https://sipse.polaris.synopsys.com" \
+                --polaris.access.token"nresfs58d55nb3d7c8s52luj2a2iciiiicnielsdae3uesi95850" \
+                --detect.project.name="CloudBeesDucky" \
+                --detect.tools="POLARIS" \
+                --detect.project.version.name="${BUILD_TAG}" \
                 --blackduck.trust.cert=true \
                 --detect.api.timeout=900000'
           }
