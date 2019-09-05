@@ -33,7 +33,7 @@ pipeline {
                 --detect.project.version.name="${BUILD_TAG}" \
                 --detect.risk.report.pdf=true \
                 --blackduck.trust.cert=true \
-                --detect.api.timeout=900000'
+                --detect.api.timeout=9000000'
             archiveArtifacts artifacts: '**/*.pdf', fingerprint: true, onlyIfSuccessful: true
           }
         }
