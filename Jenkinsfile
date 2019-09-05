@@ -11,7 +11,7 @@ pipeline {
           }
         }
         steps {
-          container('maven') {
+          container('maven-with-wget') {
             sh 'mvn clean package'
             sh 'wget https://detect.synopsys.com/detect.sh'
             sh 'chmod +x detect.sh'
