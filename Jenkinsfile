@@ -28,7 +28,7 @@ pipeline {
                 --detect.polaris.enabled="true" \
                 --detect.tools="POLARIS" \
                 --polaris.url="https://sipse.polaris.synopsys.com" \
-                --polaris.access.token="nresfs58d55nb3d7c8s52luj2a2iciiiicnielsdae3uesi95850" \
+                --polaris.access.token="nresfs58d55nb3d7c8s52luj2a2iciiiicnielsdae3uesi95850" '
           }
         }
       }
