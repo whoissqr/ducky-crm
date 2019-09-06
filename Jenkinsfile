@@ -23,9 +23,7 @@ pipeline {
         steps {
           container('detect') {
             unstash 'builtSources'
-            sh 'wget https://detect.synopsys.com/detect.sh'
-            sh 'chmod +x detect.sh'
-            sh './detect.sh \
+            sh 'bash <(curl -s https://detect.synopsys.com/detect.sh) \
                 --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                 --blackduck.api.token="MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ==" \
                 --detect.project.name="CloudBeesDucky" \
