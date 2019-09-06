@@ -28,14 +28,18 @@ pipeline {
 
         parallel {
           steps {
-            container('detect') {
+            container('docker-with-detect') {
               sh 'ls'
+              sh 'java -version'
+              sh 'docker --version'
+              sh 'wget --version'
             }
           }
 
           steps {
             container('detect') {
               sh 'ls'
+              sh 'java -version'
             }
           }
         }
