@@ -22,13 +22,13 @@ pipeline {
       steps {
         container('docker-with-detect') {
           unstash 'builtSources'
-          sh 'cat my_password.txt | docker login --username foo --password-stdin'
+          sh 'cat my_password.txt | docker login --username gautambaghel --password-stdin'
           sh 'docker build -t gautambaghel/cloudbees_detect_app:latest .'
           sh 'ls'
           sh 'java -version'
         }
       }
     }
-    
+
   }
 }
