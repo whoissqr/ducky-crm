@@ -3,7 +3,7 @@ pipeline {
   agent none
   stages {
 
-      stage('Build') {
+      stage('Build + Detector + Static Scan') {
         agent { label 'maven-app' }
         when {
           expression {
