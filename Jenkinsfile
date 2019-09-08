@@ -8,7 +8,7 @@ pipeline {
         steps {
           container('maven') {
             sh 'mvn clean package'
-            stash includes: 'target', name: 'builtSources'
+            stash includes: 'target/', name: 'builtSources'
           }
         }
       }
