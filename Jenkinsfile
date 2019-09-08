@@ -32,7 +32,7 @@ pipeline {
               --blackduck.trust.cert=true \
               --detect.project.name="CloudBeesDucky" \
               --detect.tools="DOCKER" \
-              --detect.docker.image="gautambaghel/cloudbees_detect_app:latest"
+              --detect.docker.image="gautambaghel/cloudbees_detect_app:latest" \
               --detect.project.version.name="DOCKER_${BUILD_TAG}" \
               --detect.risk.report.pdf=true \
               --detect.report.timeout=9000'
