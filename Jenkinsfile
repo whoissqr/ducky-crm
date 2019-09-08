@@ -20,7 +20,7 @@ pipeline {
         }
       }
       steps {
-        container('jnlp-docker-with-detect') {
+        container('docker-with-detect') {
           unstash 'builtSources'
           sh 'cat my_password.txt | docker login --username gautambaghel --password-stdin'
           sh 'docker build -t gautambaghel/cloudbees_detect_app:latest .'
