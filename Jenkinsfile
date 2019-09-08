@@ -18,11 +18,11 @@ pipeline {
             sh './detect.sh \
                 --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                 --blackduck.api.token="MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ==" \
+                --blackduck.trust.cert=true \
                 --detect.project.name="CloudBeesDucky" \
                 --detect.tools="DETECTOR" \
                 --detect.project.version.name="Detector_${BUILD_TAG}" \
-                --detect.risk.report.pdf=true \
-                --blackduck.trust.cert=true'
+                --detect.risk.report.pdf=true'
             
             sh './detect.sh \
                 --detect.polaris.enabled="true" \
