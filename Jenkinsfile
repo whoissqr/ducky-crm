@@ -36,6 +36,7 @@ pipeline {
               --detect.project.version.name="DOCKER_${BUILD_TAG}" \
               --detect.risk.report.pdf=true \
               --detect.report.timeout=9000'
+          archiveArtifacts artifacts: '**/*.pdf', fingerprint: true, onlyIfSuccessful: true
           sh 'docker push gautambaghel/cloudbees_detect_app:latest'
         }
       }
