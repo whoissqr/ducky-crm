@@ -28,12 +28,12 @@ pipeline {
             sh './detect.sh \
                 --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                 --blackduck.api.token="MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ==" \
+                --blackduck.trust.cert=true \
                 --detect.project.name="CloudBeesDucky" \
                 --detect.tools="SIGNATURE_SCAN" \
                 --detect.project.version.name="${BUILD_TAG}" \
                 --detect.risk.report.pdf=true \
-                --detect.report.timeout=9000 \
-                --blackduck.trust.cert=true' 
+                --detect.report.timeout=9000' 
             archiveArtifacts artifacts: '**/*.pdf', fingerprint: true, onlyIfSuccessful: true
           }
         }
