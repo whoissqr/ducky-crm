@@ -30,6 +30,7 @@ pipeline {
                   --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                   --blackduck.api.token="MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ==" \
                   --blackduck.trust.cert=true \
+                  --logging.level.com.synopsys.integration=DEBUG \
                   --detect.project.name="CloudBeesDucky" \
                   --detect.tools="DOCKER" \
                   --detect.docker.image="gautambaghel/cloudbees_detect_app:latest" \
