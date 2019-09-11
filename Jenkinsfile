@@ -30,8 +30,8 @@ pipeline {
             },
             b: {
               echo "This is branch b"
-              sh "docker -v"
               sh "java -version"
+              sh "docker -v"
             }
           )
         }
