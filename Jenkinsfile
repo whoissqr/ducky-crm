@@ -25,7 +25,7 @@ pipeline {
             sh 'cat my_password.txt | docker login --username gautambaghel --password-stdin'
             sh 'docker build -t gautambaghel/cloudbees_detect_app:latest .'
             sh 'docker save -o /opt/blackduck/shared/target/cloudbees_detect_app.tar cloudbees_detect_app:latest'
-            sh 'opt/blackduck/detect.sh \
+            sh '/opt/blackduck/detect.sh \
                     --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                     --blackduck.api.token="MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ==" \
                     --blackduck.trust.cert=true \
