@@ -24,7 +24,7 @@ pipeline {
             unstash 'builtSources'
             sh 'ls'
             sh 'cat my_password.txt | docker login --username gautambaghel --password-stdin'
-            sh 'docker build -t gautambaghel/cloudbees_detect_app:latest .'
+            sh 'docker build -t cloudbees_detect_app:latest .'
             sh 'docker save -o /opt/blackduck/shared/target/cloudbees_detect_app.tar cloudbees_detect_app:latest'
             sh '/opt/blackduck/detect.sh \
                     --blackduck.url="https://bizdevhub.blackducksoftware.com" \
