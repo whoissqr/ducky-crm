@@ -19,14 +19,6 @@ pipeline {
             currentBuild.result == null || currentBuild.result == 'SUCCESS'
           }
         }
-          
-            stage('Scan + Upload') {
-        agent { label 'docker-app' }
-        when {
-          expression {
-            currentBuild.result == null || currentBuild.result == 'SUCCESS'
-          }
-        }
         steps {
           container('docker-with-detect') {
             unstash 'builtSources'
@@ -54,6 +46,6 @@ pipeline {
           }
         }
       }
-    
+          
   }
 }
