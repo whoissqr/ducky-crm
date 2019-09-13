@@ -62,7 +62,7 @@ pipeline {
                     agent { label "python-app" }
                     steps {
                         container('python') {
-                            sh 'python /opt/blackduck/bdba.py \
+                            sh 'python /opt/blackduck/bdba-pdf.py \
                                 --app="/opt/blackduck/shared/target/cloudbees_detect_app.tar" \
                                 --protecode-host="protecode-sc.com" \
                                 --protecode-username="gautamb@synopsys.com" \
@@ -72,7 +72,7 @@ pipeline {
                     }
                     post {
                         always {
-                            archiveArtifacts artifacts: '**/*.csv', fingerprint: true, onlyIfSuccessful: true
+                            archiveArtifacts artifacts: '**/*.pdf', fingerprint: true, onlyIfSuccessful: true
                         }
                     }
                 }
