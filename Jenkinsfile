@@ -61,7 +61,7 @@ pipeline {
                 stage('Black Duck Binary Analysis') {
                     agent { label "python-app" }
                     steps {
-                        container('docker-with-detect') {
+                        container('python') {
                             sh 'python /opt/blackduck/bdba.py \
                                 --app="/opt/blackduck/shared/target/cloudbees_detect_app.tar" \
                                 --protecode-host="protecode-sc.com" \
