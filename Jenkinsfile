@@ -22,7 +22,7 @@ pipeline {
         steps {
           container('docker-with-detect') {
             unstash 'builtSources'
-            sh 'mkdir /opt/blackduck/shared/target/'
+            sh 'mkdir -p /opt/blackduck/shared/target/'
             sh 'docker build -t cloudbees_detect_app:latest .'
             sh 'docker save -o /opt/blackduck/shared/target/cloudbees_detect_app.tar cloudbees_detect_app:latest'
           }
