@@ -66,7 +66,8 @@ pipeline {
                                 --app="/opt/blackduck/shared/target/cloudbees_detect_app.tar" \
                                 --protecode-host="protecode-sc.com" \
                                 --protecode-username="gautamb@synopsys.com" \
-                                --protecode-password="OldSpice.2019"'
+                                --protecode-password="OldSpice.2019" \
+                                --protecode-group="Duck Binaries"'
                         }
                     }
                     post {
