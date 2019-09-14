@@ -84,7 +84,7 @@ pipeline {
         steps {
           container('docker-with-detect') {
             sh 'cat my_password.txt | docker login --username gautambaghel --password-stdin'
-            sh 'docker tag -t cloudbees_detect_app:latest gautambaghel/cloudbees_detect_app:latest'
+            sh 'docker tag cloudbees_detect_app:latest gautambaghel/cloudbees_detect_app:latest'
             sh 'docker push gautambaghel/cloudbees_detect_app:latest'
           }
         }
