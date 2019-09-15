@@ -77,7 +77,7 @@ pipeline {
                     }
                     post {
                         always {
-                            stash includes: '**/*.pdf', name: 'detectReport'
+                            stash includes: '**/*.pdf', name: 'bdbaReport'
                         }
                     }
                 }
@@ -89,7 +89,8 @@ pipeline {
         steps {
           container('docker-with-detect') {
             unstash 'detectReport'
-            sh 'ls'
+            unstash 'bdbaReport'
+            sh 'find . -type f -iname "*.pdf" -exec tar -cf synopsys_scan_results.tar "{}" +'
             archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
             sh 'cat my_password.txt | docker login --username gautambaghel --password-stdin'
             sh 'docker tag cloudbees_detect_app:latest gautambaghel/cloudbees_detect_app:latest'
