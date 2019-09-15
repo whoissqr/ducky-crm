@@ -3,7 +3,7 @@ pipeline {
   agent none
   environment {
         BLACKDUCK_ACCESS_TOKEN  = credentials('jenkins-blackduck-access-token')
-        POLARIS_ACCESS_PASSWORD = credentials('jenkins-polaris-access-token')
+        POLARIS_ACCESS_TOKEN = credentials('jenkins-polaris-access-token')
   }
   stages {
 
@@ -29,7 +29,7 @@ pipeline {
                 --detect.risk.report.pdf=true \
                 --detect.polaris.enabled=true \
                 --polaris.url="https://sipse.polaris.synopsys.com" \
-                --polaris.access.token="${POLARIS_ACCESS_PASSWORD}" '
+                --polaris.access.token="${POLARIS_ACCESS_TOKEN}" '
             sh 'find  . -type f -iname "*.pdf" -exec tar -rvf out.tar'
             archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
           }
