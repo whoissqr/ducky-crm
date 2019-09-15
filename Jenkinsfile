@@ -54,19 +54,19 @@ pipeline {
                                     --detect.docker.passthrough.shared.dir.path.local="/opt/blackduck/shared/" \
                                     --detect.docker.passthrough.shared.dir.path.imageinspector="/opt/blackduck/shared" \
                                     --detect.docker.passthrough.imageinspector.service.start=false'
-                            sh 'find . -type f -iname "*.pdf" -exec tar -cf synopsys_scan_results.tar "{}" +'
                         }
                     }
                     post {
                         always {
-                            archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
+                            stash includes: '**/*.pdf', name: 'detectReport'
                         }
                     }
                 }
                 stage('Black Duck Binary Analysis') {
                     agent { label "python-app" }
                     steps {
-                        container('python') {
+                        container('python') {           
+                            unstash 'detectReport'
                             sh 'python /opt/blackduck/bdba-pdf.py \
                                 --app="/opt/blackduck/shared/target/cloudbees_detect_app.tar" \
                                 --protecode-host="protecode-sc.com" \
