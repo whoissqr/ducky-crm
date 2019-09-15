@@ -65,8 +65,7 @@ pipeline {
                 stage('Black Duck Binary Analysis') {
                     agent { label "python-app" }
                     steps {
-                        container('python') {           
-                            unstash 'detectReport'
+                        container('python') {     
                             sh 'python /opt/blackduck/bdba-pdf.py \
                                 --app="/opt/blackduck/shared/target/cloudbees_detect_app.tar" \
                                 --protecode-host="protecode-sc.com" \
@@ -78,7 +77,7 @@ pipeline {
                     }
                     post {
                         always {
-                            archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
+                            stash includes: '**/*.pdf', name: 'detectReport'
                         }
                     }
                 }
@@ -89,6 +88,9 @@ pipeline {
         agent { label 'docker-app' }
         steps {
           container('docker-with-detect') {
+            unstash 'detectReport'
+            sh 'ls'
+            archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
             sh 'cat my_password.txt | docker login --username gautambaghel --password-stdin'
             sh 'docker tag cloudbees_detect_app:latest gautambaghel/cloudbees_detect_app:latest'
             sh 'docker push gautambaghel/cloudbees_detect_app:latest'
