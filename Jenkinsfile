@@ -16,7 +16,7 @@ pipeline {
         }
         steps {
           container('maven-with-wget') {
-            sh 'find  . -type f -iname "*.pdf" -exec tar -rvf out.tar {};'
+            sh 'find  . -type f -iname "*.pdf" -exec tar -rvf synopsys_scan_results.tar "{}" +'
             sh 'mvn clean package'
             sh 'wget https://detect.synopsys.com/detect.sh'
             sh 'chmod +x detect.sh'
@@ -31,7 +31,7 @@ pipeline {
                 --detect.polaris.enabled=true \
                 --polaris.url="https://sipse.polaris.synopsys.com" \
                 --polaris.access.token="${POLARIS_ACCESS_TOKEN}" '
-            sh 'find  . -type f -iname "*.pdf" -exec tar -rvf out.tar {};'
+            sh 'find  . -type f -iname "*.pdf" -exec tar -rvf synopsys_scan_results.tar "{}" +'
             archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
           }
         }
