@@ -1,6 +1,10 @@
 
 pipeline {
   agent none
+  environment {
+        BLACKDUCK_ACCESS_TOKEN  = credentials('jenkins-blackduck-access-token')
+        POLARIS_ACCESS_PASSWORD = credentials('jenkins-polaris-access-token')
+  }
   stages {
 
       stage('Build + Detector + Static Scan') {
@@ -17,20 +21,17 @@ pipeline {
             sh 'chmod +x detect.sh'
             sh './detect.sh \
                 --blackduck.url="https://bizdevhub.blackducksoftware.com" \
-                --blackduck.api.token="MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ==" \
+                --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
                 --blackduck.trust.cert=true \
                 --detect.project.name="CloudBeesDucky" \
-                --detect.tools="DETECTOR" \
-                --detect.project.version.name="Detector_${BUILD_TAG}" \
-                --detect.risk.report.pdf=true'
-            
-            sh './detect.sh \
-                --detect.polaris.enabled="true" \
-                --detect.tools="POLARIS" \
+                --detect.tools="DETECTOR,POLARIS" \
+                --detect.project.version.name="DETECTOR_${BUILD_TAG}" \
+                --detect.risk.report.pdf=true
+                --detect.polaris.enabled=true \
                 --polaris.url="https://sipse.polaris.synopsys.com" \
-                --polaris.access.token="nresfs58d55nb3d7c8s52luj2a2iciiiicnielsdae3uesi95850" '
-            
-             archiveArtifacts artifacts: '**/*.pdf', fingerprint: true, onlyIfSuccessful: true
+                --polaris.access.token="${POLARIS_ACCESS_PASSWORD}" '
+            sh 'find  . -type f -iname '*.pdf' -exec tar -rvf out.tar {} \;'
+            archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
           }
         }
       }
