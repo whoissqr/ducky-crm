@@ -30,7 +30,6 @@ pipeline {
                 --detect.polaris.enabled=true \
                 --polaris.url="https://sipse.polaris.synopsys.com" \
                 --polaris.access.token="${POLARIS_ACCESS_PASSWORD}" '
-            sh 'find  . -type f -iname "*.pdf" -exec tar -rvf out.tar {} \;'
             archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
           }
         }
