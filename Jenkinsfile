@@ -10,7 +10,6 @@ pipeline {
         agent { label 'maven-app' }
         steps {
           container('maven') {
-            sh 'find . -type f -iname "*.pdf" -exec tar -cf synopsys_scan_results.tar "{}" +'
             sh 'mvn clean package'
             stash includes: 'target/**', name: 'builtSources'
           }
