@@ -1,10 +1,6 @@
 
 pipeline {
   agent none
-  environment {
-        BLACKDUCK_ACCESS_TOKEN  = credentials('jenkins-blackduck-access-token')
-        POLARIS_ACCESS_PASSWORD = credentials('jenkins-polaris-access-token')
-  }
   stages {
 
       stage('Build + Detector + Static Scan') {
