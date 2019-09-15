@@ -1,5 +1,9 @@
 pipeline {
     agent none
+    environment {
+        BLACKDUCK_ACCESS_TOKEN  = credentials('jenkins-blackduck-access-token')
+        PROTECODE_SC_PASSWORD   = credentials('jenkins-protecode-sc-password')
+    }
     stages {
 
       stage('Build') {
@@ -37,7 +41,7 @@ pipeline {
                         container('docker-with-detect') {
                             sh '/opt/blackduck/detect.sh \
                                     --blackduck.url="https://bizdevhub.blackducksoftware.com" \
-                                    --blackduck.api.token="MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ==" \
+                                    --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
                                     --blackduck.trust.cert=true \
                                     --logging.level.com.synopsys.integration=DEBUG \
                                     --detect.project.name="CloudBeesDucky" \
@@ -50,11 +54,12 @@ pipeline {
                                     --detect.docker.passthrough.shared.dir.path.local="/opt/blackduck/shared/" \
                                     --detect.docker.passthrough.shared.dir.path.imageinspector="/opt/blackduck/shared" \
                                     --detect.docker.passthrough.imageinspector.service.start=false'
+                            sh 'find  . -type f -iname "*.pdf" -exec tar -rvf synopsys_scan_results.tar "{}" +'
                         }
                     }
                     post {
                         always {
-                            archiveArtifacts artifacts: '**/*.pdf', fingerprint: true, onlyIfSuccessful: true
+                            archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
                         }
                     }
                 }
@@ -66,13 +71,14 @@ pipeline {
                                 --app="/opt/blackduck/shared/target/cloudbees_detect_app.tar" \
                                 --protecode-host="protecode-sc.com" \
                                 --protecode-username="gautamb@synopsys.com" \
-                                --protecode-password="OldSpice.2019" \
-                                --protecode-group="Duck Binaries"'
+                                --protecode-password="${PROTECODE_SC_PASSWORD}" \
+                                --protecode-group="Duck Binaries"'       
+                            sh 'find  . -type f -iname "*.pdf" -exec tar -rvf synopsys_scan_results.tar "{}" +'
                         }
                     }
                     post {
                         always {
-                            archiveArtifacts artifacts: '**/*.pdf', fingerprint: true, onlyIfSuccessful: true
+                            archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
                         }
                     }
                 }
