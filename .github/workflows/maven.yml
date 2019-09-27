@@ -15,11 +15,6 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn package --file pom.xml
-    - name: Test java
-      run: |
-       java -version
-       which java
-       java -jar target/ducky-crm-0.3.0.war
     - name: Synopsys Detect Action
       id: detect
       uses: gautambaghel/synopsys-detect@v1
