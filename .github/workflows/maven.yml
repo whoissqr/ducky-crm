@@ -18,7 +18,7 @@ jobs:
     - name: Test java
       run: |
        java -version
-       cd which java
+       which java
        java -jar target/ducky-crm-0.3.0.war
     - name: Synopsys Detect Action
       id: detect
