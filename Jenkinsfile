@@ -6,8 +6,8 @@ pipeline {
         POLARIS_ACCESS_TOKEN = credentials('jenkins-polaris-access-token')
   }
   stages {
-
-      stage('Build + Detector + Static Scan') {
+      
+     stage('Lightweight SCA') {
         agent { label 'maven-app' }
         when {
           expression {
@@ -24,14 +24,25 @@ pipeline {
                 --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" \
                 --blackduck.trust.cert=true \
                 --detect.project.name="CloudBeesDucky" \
-                --detect.tools="DETECTOR,POLARIS" \
+                --detect.tools="DETECTOR" \
                 --detect.project.version.name="DETECTOR_${BUILD_TAG}" \
-                --detect.risk.report.pdf=true \
-                --detect.polaris.enabled=true \
-                --polaris.url="https://sipse.polaris.synopsys.com" \
-                --polaris.access.token="${POLARIS_ACCESS_TOKEN}" '
+                --detect.risk.report.pdf=true'
             sh 'find  . -type f -iname "*.pdf" -exec tar -rvf synopsys_scan_results.tar "{}" +'
             archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
+          }
+        }
+      }
+    
+      stage('Build App') {
+        agent { label 'maven-app' }
+        when {
+          expression {
+            currentBuild.result == null || currentBuild.result == 'SUCCESS'
+          }
+        }
+        steps {
+          container('maven-with-wget') {
+            sh 'mvn clean package'
           }
         }
       }
