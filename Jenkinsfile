@@ -8,15 +8,9 @@ pipeline {
     stages {
         
       stage('Lightweight SCA') {
-        agent { label 'detect-app' }
-        when {
-          expression {
-            currentBuild.result == null || currentBuild.result == 'SUCCESS'
-          }
-        }
+        agent { label 'maven-app' }
         steps {
-          container('detect') {
-            unstash 'builtSources'
+          container('maven-with-wget') {
             sh 'curl -o detect.sh https://detect.synopsys.com/detect.sh'
             sh 'chmod +x detect.sh'
             sh './detect.sh \
@@ -27,20 +21,44 @@ pipeline {
                 --detect.tools="DETECTOR" \
                 --detect.project.version.name="DOCKER_${BUILD_TAG}" \
                 --detect.report.timeout=9000' 
-            sh 'find  . -type f -iname "*.pdf" -exec tar -rvf synopsys_scan_results.tar "{}" +'
-            archiveArtifacts artifacts: '**/*.tar', fingerprint: true, onlyIfSuccessful: true
           }
         }
       }
 
-      stage('Build') {
-        agent { label 'maven-app' }
-        steps {
-          container('maven') {
-            sh 'mvn clean package'
-            stash includes: 'target/**', name: 'builtSources'
-          }
-        }
+      stage('Parallel Build & Scan') {
+          parallel {
+              
+                stage('Build App') {
+                    agent { label 'maven-app' }
+                    steps {
+                      container('maven') {
+                        sh 'mvn clean package'
+                        stash includes: 'target/**', name: 'builtSources'
+                      }
+                    }
+                }
+              
+                stage('SAST + SCA') {
+                    agent { label 'maven-app' }
+                    steps {
+                      container('maven-with-wget') {
+                        sh 'curl -o detect.sh https://detect.synopsys.com/detect.sh'
+                        sh 'chmod +x detect.sh'
+                        sh './detect.sh \
+                            --blackduck.url="https://bizdevhub.blackducksoftware.com" \
+                            --blackduck.api.token="MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ==" \
+                            --blackduck.trust.cert=true \
+                            --detect.project.name="CloudBeesDucky" \
+                            --detect.tools="SIGNATURE_SCAN,BINARY_SCAN" \
+                            --detect.project.version.name="DOCKER_${BUILD_TAG}" \
+                            --detect.binary.scan.file.path="target/ducky-crm-0.3.0.war" \
+                            --detect.blackduck.signature.scanner.paths=src/,target/ \
+                            --detect.report.timeout=9000' 
+                      }
+                   }
+                }
+               
+          } 
       }
 
       stage('Save') {
@@ -62,7 +80,7 @@ pipeline {
         
       stage('Scan') {
             parallel {
-                stage('Docker Inspector') {
+                stage('Container Image Scan') {
                     agent { label "docker-app" }
                     steps {
                         container('docker-with-detect') {
@@ -72,7 +90,8 @@ pipeline {
                                     --blackduck.trust.cert=true \
                                     --logging.level.com.synopsys.integration=DEBUG \
                                     --detect.project.name="CloudBeesDucky" \
-                                    --detect.tools="DOCKER,SIGNATURE_SCAN" \
+                                    --detect.tools="DOCKER,BINARY_SCAN" \
+                                    --detect.binary.scan.file.path="/opt/blackduck/shared/target/cloudbees_detect_app.tar" \
                                     --detect.docker.image="cloudbees_detect_app:latest" \
                                     --detect.project.version.name="DOCKER_${BUILD_TAG}" \
                                     --detect.risk.report.pdf=true \
