@@ -4,6 +4,7 @@ pipeline {
         BLACKDUCK_ACCESS_TOKEN  = credentials('jenkins-blackduck-access-token')
         PROTECODE_SC_PASSWORD   = credentials('jenkins-protecode-sc-password')
         DOCKER_LOGIN_PASSWORD   = credentials('jenkins-docker-login-password')
+        POLARIS_ACCESS_TOKEN = credentials('jenkins-polaris-access-token')
     }
     stages {
         
@@ -48,8 +49,11 @@ pipeline {
                             --blackduck.url="https://bizdevhub.blackducksoftware.com" \
                             --blackduck.api.token="MDVlYWEyODQtMzc5NS00NzVkLWJhN2MtN2M4YWY3ZmUwMjJiOjRmNjc0OWEyLWFiZjUtNDgwNS05ZjBjLTllNzJmNjVmYmNhNQ==" \
                             --blackduck.trust.cert=true \
+                            --detect.polaris.enabled=true \
+                            --polaris.url="https://sipse.polaris.synopsys.com" \
+                            --polaris.access.token="${POLARIS_ACCESS_TOKEN}" \
                             --detect.project.name="CloudBeesDucky" \
-                            --detect.tools="SIGNATURE_SCAN,BINARY_SCAN" \
+                            --detect.tools="SIGNATURE_SCAN,BINARY_SCAN,POLARIS" \
                             --detect.project.version.name="DOCKER_${BUILD_TAG}" \
                             --detect.binary.scan.file.path="target/ducky-crm-0.3.0.war" \
                             --detect.blackduck.signature.scanner.paths=src/,target/ \
