@@ -1,4 +1,4 @@
-name: Ducky CI
+name: Ducky BlackDuck CI
 
 on: [push]
 
