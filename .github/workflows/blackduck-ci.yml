@@ -8,7 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-2016, ubuntu-latest]
+        os: [ubuntu-latest]
     steps:
     - uses: actions/checkout@v1
     - name: Set up JDK 1.8
@@ -18,6 +18,6 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Synopsys Detect
-      uses: blackducksoftware/github-action@2.0.0
+      uses: blackducksoftware/github-action@2.0.1
       with:
-        args: --blackduck.url="${{ secrets.BLACKDUCK_URL}}" --blackduck.api.token="${{ secrets.BLACKDUCK_API_TOKEN}}"
+        args: --blackduck.url="${{ secrets.BLACKDUCK_URL}}" --blackduck.api.token="${{ secrets.BLACKDUCK_API_TOKEN}}" --blackduck.tools="DETECTOR"
